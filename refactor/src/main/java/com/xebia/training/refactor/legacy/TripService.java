@@ -6,7 +6,7 @@ import java.util.List;
 public class TripService {
 
     public List<Trip> getUserTrips(User user) throws NotLoggedInException{
-        User loggedInUser = SecurityContext.getLoggedInUser();
+        User loggedInUser = getLoggedInUser();
         if(loggedInUser != null){
             boolean isFriend = false;
             for (User friend : user.getFriends()) {
@@ -23,5 +23,9 @@ public class TripService {
         }
         return new ArrayList<Trip>();
     }
+
+	User getLoggedInUser() {
+		return SecurityContext.getLoggedInUser();
+	}
 
 }
