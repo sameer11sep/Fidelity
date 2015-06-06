@@ -11,7 +11,6 @@ public class BubbleSortTest {
 		Integer[] list = new Integer[] { 2, 3, 4, 1, 0 };
 		new BubbleSort().sort(list);
 		assertArrayEquals(new Integer[]{0,1,2,3,4},list);
-
 	}
 
 }

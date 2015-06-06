@@ -21,7 +21,7 @@ public class MostFrequentSubString {
         System.out.println(findMostFrequentSubstrings(n, k, l, m, inputString));
     }
 
-    private static int findMostFrequentSubstrings(int n, int k, int l, int m, String inputString) {
+    public static int findMostFrequentSubstrings(int n, int k, int l, int m, String inputString) {
         Map<String, Integer> map = new HashMap<String, Integer>();
         if (inputString.length() < k)
             return 0;
@@ -63,7 +63,7 @@ public class MostFrequentSubString {
         return max;
     }
 
-    public static String[] readInputs(String arg) throws IOException {
+    private static String[] readInputs(String arg) throws IOException {
         String[] inputs = new String[3];
         BufferedReader br = new BufferedReader(new FileReader(new File(arg)));
         String line;
