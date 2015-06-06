@@ -16,13 +16,17 @@ public class TripService {
                 }
             }
             if(isFriend){
-                TripDao.getTrips(user);
+                return getTrips(user);
             }
         }else{
             throw new NotLoggedInException("You are not currently logged in..");
         }
         return new ArrayList<Trip>();
     }
+
+	List<Trip> getTrips(User user) {
+		return TripDao.getTrips(user);
+	}
 
 	User getLoggedInUser() {
 		return SecurityContext.getLoggedInUser();

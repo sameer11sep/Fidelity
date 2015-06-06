@@ -12,5 +12,17 @@ public class User {
 	public List<User> getFriends() {
 		return friends;
 	}
+	
+	public void addFriend(User user){
+		this.friends.add(user);
+	}
+
+	public void addTrip(Trip trip) {
+		this.trips.add(trip);
+	}
+
+	public List<Trip> getTrips() {
+		return this.trips;
+	}
 
 }
