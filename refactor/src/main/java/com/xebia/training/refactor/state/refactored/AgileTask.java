@@ -12,7 +12,7 @@ public class AgileTask {
         state.assigned(this);
     }
 
-    public void moveToTest(AgileTask task) {
+    public void moveToTest() {
         state.moveToTest(this);
     }
 

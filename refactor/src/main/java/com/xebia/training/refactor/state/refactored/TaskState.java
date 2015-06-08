@@ -10,8 +10,8 @@ public abstract class TaskState {
 
     public static final TaskState DONE = new Done("DONE");
 
-    public TaskState(String todo) {
-        this.name=todo;
+    public TaskState(String stateName) {
+        this.name=stateName;
     }
 
     public void assigned(AgileTask task) {
@@ -33,5 +33,6 @@ public abstract class TaskState {
     private void error() {
         throw new IllegalStateException("Cannot make the transition from current state");
     }
+
 
 }
