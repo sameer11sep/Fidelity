@@ -8,8 +8,31 @@ public class Loan {
     private int rating;
     private Date start;
     private Date expiry;
-    private Date maturity;
-    private static final int MILLIS_PER_DAY = 86400000;
+    public double getNotional() {
+		return notional;
+	}
+
+	public double getOutstanding() {
+		return outstanding;
+	}
+
+	public Date getStart() {
+		return start;
+	}
+
+	public Date getExpiry() {
+		return expiry;
+	}
+
+	public Date getMaturity() {
+		return maturity;
+	}
+
+	public double getUnusedPercentage() {
+		return unusedPercentage;
+	}
+
+	private Date maturity;
     private double unusedPercentage;
 
     public Loan(double notional, int rating, Date start, Date expiry, Date maturity) {
@@ -22,33 +45,11 @@ public class Loan {
     }
 
     public double calculateCapital() {
-        return riskAmount() * duration() * RiskFactor.forRiskRating(rating);
+    	CapitalStrategy strategy=new CapitalStrategyFactory().create(this);
+    	return strategy.calculate();
     }
 
-    private double calcUnusedRiskAmount() {
-        return (notional - outstanding) * unusedPercentage;
-    }
-
-    private double duration() {
-        if (expiry == null)
-            return ((maturity.getTime() - start.getTime()) / MILLIS_PER_DAY) / 365;
-        else if (maturity == null)
-            return ((expiry.getTime() - start.getTime()) / MILLIS_PER_DAY) / 365;
-        else {
-            long millisToExpiry = expiry.getTime() - start.getTime();
-            long millisFromExpiryToMaturity = maturity.getTime() - expiry.getTime();
-            double revolverDuration = (millisToExpiry / MILLIS_PER_DAY) / 365;
-            double termDuration = (millisFromExpiryToMaturity / MILLIS_PER_DAY) / 365;
-            return revolverDuration + termDuration;
-        }
-    }
-
-    private double riskAmount() {
-        if (unusedPercentage != 1.00)
-            return outstanding + calcUnusedRiskAmount();
-        else
-            return outstanding;
-    }
+    
 
     public void setOutstanding(double newOutstanding) {
         outstanding = newOutstanding;
@@ -69,4 +70,8 @@ public class Loan {
                 unusedPercentage = 0.25;
         }
     }
+
+	public int getRating() {
+		return this.rating;
+	}
 }
